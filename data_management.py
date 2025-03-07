@@ -211,3 +211,45 @@ def edit_transaction():
     df.to_csv("finance_tracker.csv")
     print(f"Your transaction was added {df}")
 
+def view_range():
+    import pandas as pd
+    finance_tracker = pd.read_csv("finance_tracker.csv")
+    df = pd.DataFrame(finance_tracker)
+    df.sort_values(by="Date", ascending= False)
+    df.drop(['Unnamed: 0'], axis=1, inplace=True)
+
+    print(df)
+    print("Please enter the date range you wish to obtain information about ")
+
+    from datetime import datetime
+    try:
+        date1 = input("Please enter the expense day (YYYY-MM-DD): ")
+        date2 = input("Please enter the expense day (YYYY-MM-DD): ")
+
+        #filter data between tow dates
+        expense_date = datetime.strptime(date1, "%Y-%m-%d")
+        expense_date2 = datetime.strptime(date2, "%Y-%m-%d")
+
+        if expense_date>expense_date2:
+
+            filtered_df = df.loc[(df['Date'] >= date2)
+                                 & (df['Date'] <= date1)]
+            print(filtered_df)
+
+        else:
+
+            filtered_df = df.loc[(df['Date'] >= date1)
+                                 & (df['Date'] <= date2)]
+            print(filtered_df)
+
+    except ValueError:
+        print("Invalid date format. Please use YYYY-MM-DD.")
+
+def view_all():
+    import pandas as pd
+    finance_tracker = pd.read_csv("finance_tracker.csv")
+    df = pd.DataFrame(finance_tracker)
+    df.sort_values(by="Date", ascending= False)
+    df.drop(['Unnamed: 0'], axis=1, inplace=True)
+
+    print(df)

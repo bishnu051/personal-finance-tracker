@@ -1,4 +1,6 @@
 #The stable production branch containing the latest release-ready code.
+import data_management
+
 
 if __name__ == "__main__":
     print("\n")
@@ -25,15 +27,15 @@ if __name__ == "__main__":
         print("\n")
 
         if (choise == "1"):
-            view_transactions()
+            data_management.view_all()
         elif (choise == "2"):
-            view_transactions()
+            data_management.view_range()
         elif (choise == "3"):
-            add_transaction ()
+            data_management.add_transaction()
         elif (choise == "4"):
-            edit_transaction()
+            data_management.edit_transaction()
         elif (choise == "5"):
-            delete_transaction()
+            data_management.delete_transaction()
         elif (choise == "6"):
             analyze_spending()
         elif (choise == "7"):

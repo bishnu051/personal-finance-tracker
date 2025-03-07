@@ -1,7 +1,4 @@
-from operator import index
-from pdb import find_function
 
-from pandas.core.interchange.dataframe_protocol import DataFrame
 
 
 def time_date ():
@@ -222,7 +219,9 @@ def view_range():
     df = pd.DataFrame(finance_tracker)
     df.sort_values(by="Date", ascending= False)
     df.drop(['Unnamed: 0'], axis=1, inplace=True)
-    print(type(df["Date"]))
+
+    print(df)
+    #df["Date"] = datetime.strptime(df['Date'], format="%Y-%m-%d")
     print("Please enter the date range you wish to obtain information about ")
 
     from datetime import datetime
@@ -230,17 +229,34 @@ def view_range():
         date1 = input("Please enter the expense day (YYYY-MM-DD): ")
         date2 = input("Please enter the expense day (YYYY-MM-DD): ")
 
+        #filter data between tow dates
         expense_date = datetime.strptime(date1, "%Y-%m-%d")
         expense_date2 = datetime.strptime(date2, "%Y-%m-%d")
-        print(expense_date)
-        print(expense_date2)
+
+        if expense_date>expense_date2:
+
+            filtered_df = df.loc[(df['Date'] >= date2)
+                                 & (df['Date'] <= date1)]
+            print(filtered_df)
+
+        else:
+
+            filtered_df = df.loc[(df['Date'] >= date1)
+                                 & (df['Date'] <= date2)]
+            print(filtered_df)
 
     except ValueError:
         print("Invalid date format. Please use YYYY-MM-DD.")
 
 
+def view_all():
+    import pandas as pd
+    finance_tracker = pd.read_csv("finance_tracker.csv")
+    df = pd.DataFrame(finance_tracker)
+    df.sort_values(by="Date", ascending= False)
+    df.drop(['Unnamed: 0'], axis=1, inplace=True)
 
+    print(df)
 
-
-a=time_date()
+a=view_all()
 print(a)
