@@ -21,7 +21,10 @@ if __name__ == "__main__":
         print("(7) Calculate Average Monthly Spending")
         print("(8) Show Top Spending Category")
         print("(9) Visualize Monthly Spending Trend")
-        print("(10) Exit")
+        print("(10) Set monthly income")
+        print("(11) Set category budget")
+        print("(12) Budget status")
+        print("(13) Exit")
 
         choise = input ("Enter your choise: ")
         print("\n")
@@ -45,6 +48,12 @@ if __name__ == "__main__":
         elif (choise == "9"):
             spending_trend()
         elif (choise == "10"):
+            data_management.monthly_income()
+        elif (choise == "11"):
+            category_budget()
+        elif (choise == "12"):
+            budget_status()
+        elif (choise == "13"):
 
             break
         else:
