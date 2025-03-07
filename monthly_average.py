@@ -1,15 +1,14 @@
+from data import load_data
 import pandas as pd
-import matplotlib.pyplot as plt
-
-df = pd.read_csv("sampledata.csv")
-df['Date'] = pd.to_datetime(df['Date'])
 
 def average_monthly_spending():
-    df['Month'] = df['Date'].dt.to_period('M')
-    monthly_total = df[df['Type'] == 'Expense'].groupby('Month')['Amount'].sum()
+    data = load_data()
+    data['Date'] = pd.to_datetime(data['Date'])
+    data['Month'] = data['Date'].dt.to_period('M')
+    monthly_total = data[data['Type'] == 'Expense'].groupby('Month')['Amount'].sum()
     avg_total_spending = monthly_total.mean()
 
-    avg_spending_by_category = df[df['Type'] == 'Expense'].groupby(['Month', 'Category'])['Amount'].sum().groupby(
+    avg_spending_by_category = data[data['Type'] == 'Expense'].groupby(['Month', 'Category'])['Amount'].sum().groupby(
         'Category').mean()
 
     print("--- Average Monthly Spending (Total) ---")
@@ -21,4 +20,3 @@ def average_monthly_spending():
     return avg_total_spending, avg_spending_by_category
 
 
-average_monthly_spending()

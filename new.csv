@@ -12,4 +12,5 @@ Date,Category,Description,Amount,Type
 2024-10-18,Transport,Taxi,25.0,Expense
 2024-10-20,Income,Investment Return,200.0,Income
 2024-10-25,Food,Groceries,80.0,Expense
-2024-10-30,Food,party,450.0,Expense
+2024-10-29,Rent,Monthly Rent,1250.0,Expense
+2024-11-01,Food,dinner out,50.45,Expense

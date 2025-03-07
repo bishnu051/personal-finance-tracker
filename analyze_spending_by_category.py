@@ -1,15 +1,14 @@
-import pandas as pd
+from data import load_data, save_data
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("sampledata.csv")
 # Analyze Spending by Category
 def analyze_spending():
-    spending = df[df['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
+    data = load_data()
+    spending = data[data['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
     print("--- Spending by Category ---")
     print(spending)
-    spending.plot(kind='bar', title='Spending by Category')
+    spending.plot(kind='bar', figsize=(10, 6), title='Spending by Category')
     plt.xlabel('Category')
     plt.ylabel('Total Amount')
     plt.show()
 
-analyze_spending()

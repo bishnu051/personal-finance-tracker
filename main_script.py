@@ -1,4 +1,13 @@
 #The stable production branch containing the latest release-ready code.
+from delete_transaction import delete_transaction
+from edit_transaction import edit_transaction
+from add_transaction import add_transaction
+from transaction_by_date_range import view_transactions_by_date
+from data import load_data, save_data, view_data
+from analyze_spending_by_category import analyze_spending
+from monthly_average import average_monthly_spending
+from top_spending_category import top_spending_category
+from budget import set_monthly_income, set_category_budget, check_budget_status
 
 if __name__ == "__main__":
     print("\n")
@@ -6,45 +15,49 @@ if __name__ == "__main__":
     print("\n")
 
     while True:
-        print("")
-        print("what do you wanna do today?")
-        print("Please select one of the following option")
-        print("\n")
-        print("(1) View All Transactions")
-        print("(2) View Transactions by Date Range")
-        print("(3) Add a Transaction")
-        print("(4) Edit a Transaction")
-        print("(5) Delete a Transaction")
-        print("(6) Analyze Spending by Category")
-        print("(7) Calculate Average Monthly Spending")
-        print("(8) Show Top Spending Category")
-        print("(9) Visualize Monthly Spending Trend")
-        print("(10) Exit")
+        print("\n=== Personal Finance Tracker ===")
+        print("1. View All Transactions")
+        print("2. View Transactions by Date Range")
+        print("3. Add a Transaction")
+        print("4. Edit a Transaction")
+        print("5. Delete a Transaction")
+        print("6. Analyze Spending by Category")
+        print("7. Calculate Average Monthly Spending")
+        print("8. Show Top Spending Category")
+        print("9. Set Monthly Income")
+        print("10. Set Category Budget")
+        print("11. Check Budget Status")
+        print("12. Visualize Spending Trends")
+        print("13. Save Transactions to CSV")
+        print("14. Exit")
 
-        choise = input ("Enter your choise: ")
+        user_choice = input("Choose an option (1-14): ")
         print("\n")
 
-        if (choise == "1"):
-            view_transactions()
-        elif (choise == "2"):
-            view_transactions()
-        elif (choise == "3"):
-            add_transaction ()
-        elif (choise == "4"):
-            edit_transaction()
-        elif (choise == "5"):
+        if user_choice == "1":
+            view_data()
+        elif user_choice == "2":
+            view_transactions_by_date()
+        elif user_choice == "3":
+            add_transaction()
+        elif user_choice == "4":
+            view_data()
+            index = int(input("Enter transaction index to edit: "))
+            edit_transaction(index)
+        elif user_choice == "5":
             delete_transaction()
-        elif (choise == "6"):
+        elif user_choice == "6":
             analyze_spending()
-        elif (choise == "7"):
-            monyhly_spending()
-        elif (choise == "8"):
-            top_spending()
-        elif (choise == "9"):
-            spending_trend()
-        elif (choise == "11"):
-
-            break
+        elif user_choice == "7":
+            average_monthly_spending()
+        elif user_choice == "8":
+            top_spending_category()
+        elif user_choice == "9":
+            set_monthly_income()
+        elif user_choice == "10":
+            set_category_budget()
+        elif user_choice == "11":
+            check_budget_status()
         else:
             print("Sorry, please enter a valid option")
-    print("Goodbye")
+print("Goodbye")
