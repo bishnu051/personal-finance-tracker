@@ -15,5 +15,3 @@ def set_category_budget():
     for category, amount in budgets.items():
         print(f"- {category}: ${amount:.2f}")
     return budgets
-
-set_category_budget()
