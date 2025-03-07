@@ -1,0 +1,6 @@
+,Date,Category,Description,Amount,Type
+0,2025-12-12 00:00:00,Home,BC hydro,28.98,EXPENSE
+1,2025-11-12 00:00:00,Food,Groceries,300.0,EXPENSE
+2,2025-10-12 00:00:00,Fun,Cinema,30.0,EXPENSE
+3,2025-05-10 00:00:00,Food,Pizza,30.0,EXPENSE
+4,2025-03-07 00:00:00,Work,Salary,2300.0,INCOME
