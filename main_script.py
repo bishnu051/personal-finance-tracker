@@ -44,7 +44,7 @@ if __name__ == "__main__":
             top_spending()
         elif (choise == "9"):
             spending_trend()
-        elif (choise == "11"):
+        elif (choise == "10"):
 
             break
         else:
