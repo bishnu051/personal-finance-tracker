@@ -5,7 +5,7 @@ import os
 budget_file = "budget.csv"
 
 def set_monthly_income():
-    """Set and save the monthly income to the budget file, with option to cancel using '*'."""
+    """Set and save the monthly income to the budget file."""
     while True:
         income_input = input("Enter your total monthly income (* to Cancel): ")
         if income_input == "*":
@@ -24,7 +24,7 @@ def set_monthly_income():
     print(f"Monthly income of ${income:.2f} saved successfully!")
 
 def set_category_budget():
-    """Set and save budgets for different spending categories, with option to cancel using '*'."""
+    """Set and save the budgets for different spending categories."""
     categories = ["Food", "Rent", "Utilities", "Transport", "Other"]
 
     # Load existing budget file if it exists
@@ -51,7 +51,7 @@ def set_category_budget():
 
         budget_list.append({"Type": category, "Amount": budget})
 
-    # Add category budgets to the DataFrame
+    # Add category budgets to the dataframe
     new_budget_data = pd.DataFrame(budget_list)
     budget_data = pd.concat([budget_data, new_budget_data], ignore_index=True)
 
@@ -89,7 +89,7 @@ def check_budget_status():
     print("\n--- Budget Status ---")
     for category, budget in budgets.items():
         if category == "Monthly Income":
-            continue  # Skip income since it's not an expense category
+            continue  # Skip income since it's not an expense
 
         spent = spending.get(category, 0)
         status = ""

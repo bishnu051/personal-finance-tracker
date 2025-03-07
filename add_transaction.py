@@ -76,10 +76,10 @@ def add_transaction():
         except ValueError:
             print("Invalid input! Please enter a numeric value.")
 
-    # determine transaction type
+    # get transaction type
     transaction_type = "Income" if category == "Income" else "Expense"
 
-    # new transaction as a DataFrame row
+    # new transaction as a dataframe row
     new_transaction = pd.DataFrame([[date, category, description, amount, transaction_type]],
                                    columns=["Date", "Category", "Description", "Amount", "Type"])
 

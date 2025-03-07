@@ -11,7 +11,6 @@ from budget import set_monthly_income, set_category_budget, check_budget_status
 from visualization import visualization_menu
 
 if __name__ == "__main__":
-    print("\n")
     print ("HELLO THIS IS YOUR FINANCE TRACKER")
     print("\n")
 
