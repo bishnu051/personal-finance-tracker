@@ -68,9 +68,9 @@ def load_budget():
     return dict(zip(budget_data["Type"], budget_data["Amount"]))
 
 def check_budget_status():
-    """Compare actual spending against the budget and show warnings/suggestions."""
+    """Compare spending against the budget and show warnings/suggestions for the latest month."""
     data = load_data("sampledata.csv")  # Load transaction data
-    budgets = load_budget()  # Load budgets
+    budgets = load_budget()
 
     if not budgets:
         print("\nNo budget data found! Please set your budget first.")
@@ -81,12 +81,22 @@ def check_budget_status():
         return
 
     # Convert Date column to datetime format
-    data["Date"] = pd.to_datetime(data["Date"], errors="coerce")
+    data["Date"] = pd.to_datetime(data["Date"])
 
-    # Group total expenses by category
-    spending = data[data["Type"] == "Expense"].groupby("Category")["Amount"].sum()
+    # Find the most recent month in the dataset
+    latest_month = data["Date"].dt.to_period("M").max()
 
-    print("\n--- Budget Status ---")
+    # Filter data for the latest month only
+    latest_month_data = data[data["Date"].dt.to_period("M") == latest_month]
+
+    if latest_month_data.empty:
+        print(f"\nNo transactions found for the latest month: {latest_month}")
+        return
+
+    # Group total expenses by category for the latest month
+    spending = latest_month_data[latest_month_data["Type"] == "Expense"].groupby("Category")["Amount"].sum()
+
+    print(f"\n--- Budget Status for {latest_month} ---")
     for category, budget in budgets.items():
         if category == "Monthly Income":
             continue  # Skip income since it's not an expense
