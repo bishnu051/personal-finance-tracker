@@ -63,7 +63,7 @@ if __name__ == "__main__":
         elif user_choice == "13":
            export_data()
         elif user_choice == "14":
-            print("Goodbye!")
+            print("Exiting the Personal Finance Tracker. Goodbye!!")
             break
         else:
             print("Sorry, please enter a valid option")

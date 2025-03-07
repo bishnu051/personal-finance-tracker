@@ -17,7 +17,7 @@ def save_data(data, filename="sampledata.csv"):
 # function to export data
 def export_data():
     data = load_data()
-    filename = input("Enter the name for the data file to be saved")
+    filename = input("Enter file name to save (e.g., 'transactions.csv'):")
     filename = filename + ".csv"
     data.to_csv(filename, index=False)
     print(f"Transactions saved to {filename} successfully!")
