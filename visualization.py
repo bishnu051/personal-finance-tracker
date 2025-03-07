@@ -1,12 +1,15 @@
 #data visualiazation for personal finance app tracker
 import matplotlib.pyplot as plt
 import pandas as pd
-def plot_income_vs_expense(df):
+from data import load_data
+from budget import load_budget
+def plot_income_vs_expense():
+    data = load_data()
     """Visualizes income vs. expenses over time."""
     # Convert 'Date' column to datetime format
-    df['Date'] = pd.to_datetime(df['Date'])
+    data['Date'] = pd.to_datetime(data['Date'])
     # Sort transactions by date for proper trend visualization
-    df_sorted = df.sort_values('Date')
+    df_sorted = data.sort_values('Date')
 
     # Group transactions by month and type (Income/Expense) and sum up amounts
     monthly_data = df_sorted.groupby([df_sorted['Date'].dt.to_period('M'), 'Type'])['Amount'].sum().unstack().fillna(0)
@@ -28,10 +31,12 @@ def plot_income_vs_expense(df):
     plt.show()
 
 
-def plot_spending_vs_budget(df, budget_dict):
+def plot_spending_vs_budget():
+    data = load_data()
+    budget_dict = load_budget()
     """Visualizes spending by category vs. set budget with alerts."""
     # Calculate total spending for each category
-    category_totals = df[df['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
+    category_totals = data[data['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
     categories = category_totals.index.tolist()
     spending = category_totals.values.tolist()
 
@@ -59,10 +64,11 @@ def plot_spending_vs_budget(df, budget_dict):
     plt.show()
 
 
-def plot_expense_distribution(df):
+def plot_expense_distribution():
+    data = load_data()
     """Displays a pie chart of expense distribution across categories."""
     # Calculate total spending per category
-    category_totals = df[df['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
+    category_totals = data[data['Type'] == 'Expense'].groupby('Category')['Amount'].sum()
 
     # Create a pie chart to show the percentage of each category's spending
     plt.figure(figsize=(8, 8))
@@ -72,23 +78,31 @@ def plot_expense_distribution(df):
     plt.tight_layout()
     plt.show()
 
+def visualization_menu():
+    """Displays the visualization menu and handles user choice."""
+    while True:
+        print("\nChoose a visualization:")
+        print("1. Spending vs. Budget")
+        print("2. Income vs. Expense")
+        print("3. Expense Distribution")
+        print("* to Cancel")
 
-# Example Usage:
-if __name__ == "__main__":
-    # Sample dataset containing transactions
-    data = {
-        'Date': ['2024-10-01', '2024-10-02', '2024-10-02', '2024-10-03', '2024-10-04', '2024-10-06'],
-        'Category': ['Food', 'Rent', 'Utilities', 'Food', 'Transport', 'Income'],
-        'Description': ['Grocery', 'Monthly Rent', 'Electricity Bill', 'Dinner', 'Bus Ticket', 'Salary'],
-        'Amount': [50.75, 1200.00, 60.00, 30.00, 2.75, 2000.00],
-        'Type': ['Expense', 'Expense', 'Expense', 'Expense', 'Expense', 'Income']
-    }
-    df_sample = pd.DataFrame(data)
+        choice = input("Enter the number for the visualization: ").strip()
 
-    # Example budget dictionary defining spending limits per category
-    budget_example = {'Food': 500, 'Rent': 1200, 'Utilities': 200, 'Transport': 150}
+        if choice == "*":
+            print("Exiting visualization menu...")
+            break
 
-    # Generate visualizations
-    plot_income_vs_expense(df_sample)
-    plot_spending_vs_budget(df_sample, budget_example)
-    plot_expense_distribution(df_sample)
+        try:
+            choice = int(choice)
+            if choice == 1:
+                plot_spending_vs_budget()
+            elif choice == 2:
+                plot_income_vs_expense()
+            elif choice == 3:
+                plot_expense_distribution()
+            else:
+                print("Invalid choice. Please enter a number between 1 and 3.")
+        except ValueError:
+            print("Invalid input. Please enter a number (1-3) or '*' to cancel.")
+

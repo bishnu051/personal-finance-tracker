@@ -104,3 +104,4 @@ def check_budget_status():
         # Suggestions
         if spent > budget:
             print(f"  Suggestion: Consider reducing {category} spending.")
+

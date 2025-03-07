@@ -3,11 +3,12 @@ from delete_transaction import delete_transaction
 from edit_transaction import edit_transaction
 from add_transaction import add_transaction
 from transaction_by_date_range import view_transactions_by_date
-from data import load_data, save_data, view_data
+from data import load_data, save_data, view_data, export_data
 from analyze_spending_by_category import analyze_spending
 from monthly_average import average_monthly_spending
 from top_spending_category import top_spending_category
 from budget import set_monthly_income, set_category_budget, check_budget_status
+from visualization import visualization_menu
 
 if __name__ == "__main__":
     print("\n")
@@ -58,6 +59,12 @@ if __name__ == "__main__":
             set_category_budget()
         elif user_choice == "11":
             check_budget_status()
+        elif user_choice == "12":
+           visualization_menu()
+        elif user_choice == "13":
+           export_data()
+        elif user_choice == "14":
+            print("Goodbye!")
+            break
         else:
             print("Sorry, please enter a valid option")
-print("Goodbye")
